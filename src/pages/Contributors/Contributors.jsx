@@ -5,11 +5,11 @@ import { arr1, data } from '../../data'
 import { Content, Sort, Top, Wrapper } from './Contributors.styles'
 
 
-const access_token = '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'
 const Contributors = () => {
   const [repos, setRepos] = useState([])
   const [contributors, setContributors] = useState([])
-
+  
+  const access_token = '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'
   const handleFetch = async(url)=> {
     try{
 

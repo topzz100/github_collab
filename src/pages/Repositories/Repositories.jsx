@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import RepoCard from '../RepoCard/RepoCard'
 import { Content, Top, Wrapper } from './Repositories.style'
 import axios from 'axios'
-const access_token = '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'
 const Repositories = () => {
   const [repos, setRepos] = useState([])
-
+  const access_token = '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'
+  
   useEffect(() => {
     const handleFetch = async()=> {
     try{

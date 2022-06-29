@@ -7,6 +7,7 @@ import {
 
 import SingleContributor from "./pages/SingleContributor/SingleContributor";
 import Repositories from "./pages/Repositories/Repositories";
+import RepoDetails from "./pages/RepoDetails/RepoDetails";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/' element={<Contributors/>}/>
         <Route path='/details/:name' element={<SingleContributor/>}/>
         <Route path='/repos' element={<Repositories/>}/>
+         <Route path='/repos/:name' element={<RepoDetails/>}/>
       </Routes>
 
       </BrowserRouter>

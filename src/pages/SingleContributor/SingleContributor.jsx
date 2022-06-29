@@ -8,6 +8,8 @@ const access_token = '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'
 
 const SingleContributor = () => {
   const[user, setUser] = useState(null)
+   const[repos, setRepos] = useState([])
+   const[show, setShow] = useState(false)
   const {name} = useParams()
 
 
@@ -26,6 +28,22 @@ const SingleContributor = () => {
       }
     }
     fetchUser()
+  },[])
+
+  useEffect(()=>{
+    const getRepos = async() => {
+      try{
+         const res = await axios.get(`https://api.github.com/users/${name}` ,{
+        headers: {
+          'Authorization': `token ${access_token}`
+        }
+      })
+      res.data && setUser(res.data)
+      }catch(err){
+
+      }
+    }
+    getRepos()
   },[])
   console.log(user)
 
