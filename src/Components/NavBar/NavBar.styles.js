@@ -22,5 +22,11 @@ export const Wrapper = styled.div`
   }
   h4{
     margin-left: 10px;
+    padding: 4px 7px;  
+    transition:all 0.3s ease-in-out;
+    :hover{
+      letter-spacing: 2px;
+      background-color: lightgray;
+  }
   }
 `

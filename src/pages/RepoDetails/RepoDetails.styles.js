@@ -59,8 +59,10 @@ export const Details = styled.div`
     align-items: center;
     width: 100%;
     cursor: pointer;
+    transition:all 0.3s ease-in-out ;
     :hover{
       background-color: lightgray;
+      border-radius: 3px;
     }
   }
    @media(max-width: 680px){
@@ -77,12 +79,20 @@ export const ShowContrib = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
+   transition: all 0.3s ease-in-out;
+  ::before{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    content: '';
+    position: absolute;
+    opacity: 0.8;
+  }
 `
 export const Container = styled.div`
     width: 90%;
   height: 90%;
-  background-color: red;
+  background-color: gray;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -99,12 +109,17 @@ export const Container = styled.div`
 export const ConWrapper = styled.div`
    width: 150px;
   height: 200px;
-  background-color: grey;
+  background-color: lightgrey;
   border: black;
   border-radius: 5px;
   margin: 10px;
+  transition: all 0.3s ease-in-out;
+  :hover{
+    transform: scale(1.05);
+  }
   a{
     text-decoration: none;
+    color: inherit;
   }
   /* div{
     object-fit: cover;
@@ -117,10 +132,17 @@ export const ConWrapper = styled.div`
     text-align: center;
     margin-top: 10px;
   }
+   @media(max-width: 450px){
+    width: 95%;
+    height: 250px;
+  }
 `
 export const ConImage = styled.img`
   object-fit: cover;
   width: 100%;
   height: 150px;
   border-radius: 10px;
+   @media(max-width: 450px){
+    height: 200px;
+  }
 `

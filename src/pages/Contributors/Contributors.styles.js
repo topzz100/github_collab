@@ -6,7 +6,8 @@ export const Wrapper = styled.div`
 export const Top = styled.div`
 border-bottom: 1px solid black;
 display: flex;
-justify-content: flex-end;
+justify-content: space-between;
+align-items: center;
 
 `
 export const Sort = styled.div`
@@ -15,7 +16,8 @@ display: flex;
 margin-bottom: 10px;
 h4{
   margin-right: 10px;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 select{
   padding: 5px;

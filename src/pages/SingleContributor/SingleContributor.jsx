@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Container, Content, Details, Image, ImageBox, RepoImage, RepoWrapper, ShowRepo, Wrapper } from './SingleContributor.styles'
-import axios from 'axios'
 import { fetchHandler } from '../../data'
 import NavBar from '../../Components/NavBar/NavBar'
 
 
-const access_token = process.env.REACT_APP_ACCESS_TOKEN
 const SingleContributor = () => {
   const[user, setUser] = useState(null)
    const[repos, setRepos] = useState([])
@@ -82,13 +80,13 @@ const SingleContributor = () => {
       {show && 
           <ShowRepo>
             <Container>
+              <i className="fa-solid fa-xmark" onClick={() => setShow(false)}></i>
               {
                 repos?.map((rep)=>(
                   <RepoWrapper key={rep.id} >
-                  <i className="fa-solid fa-xmark" onClick={() => setShow(false)}></i>
                   <Link to={`/repos/${rep?.name}`}>
                     <RepoImage src={rep?.owner.avatar_url}/>
-                    <h4>{rep?.name}</h4>
+                    <h4>{rep?.name.slice(0,10)}</h4>
                   </Link>
                 </RepoWrapper>
 

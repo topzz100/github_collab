@@ -5,9 +5,8 @@ export const Wrapper = styled.div`
 `
 export const Top = styled.div`
 border-bottom: 1px solid black;
-display: flex;
-justify-content: flex-end;
-justify-content: center;
+/* display: flex;
+justify-content: flex-; */
 `
 export const Content = styled.div`
   display: flex;

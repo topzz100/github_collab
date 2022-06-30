@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Box, ConImage, Container, Content, ConWrapper, Details, Image, ImageBox, ShowContrib, Wrapper } from './RepoDetails.styles'
-import axios from 'axios'
 import { fetchHandler } from '../../data'
 import NavBar from '../../Components/NavBar/NavBar'
 
-const access_token = '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'
 
 const RepoDetails = () => {
  const [details, setDetails] = useState(null)
@@ -72,10 +70,10 @@ console.log(contrib)
         {show && 
           <ShowContrib>
             <Container>
+            <i class="fa-solid fa-xmark" onClick={() => setShow(false)}></i>
               {
                 contrib?.map((con)=>(
                 <ConWrapper key={con.id} >
-                  <i class="fa-solid fa-xmark" onClick={() => setShow(false)}></i>
                   <Link to={`/details/${con?.login}`}>
                     <ConImage src={con?.avatar_url}/>
                     <h4>{con?.login}</h4>

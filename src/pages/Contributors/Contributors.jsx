@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import axios from "axios"
 import ConCard from '../../Components/ConCard/ConCard'
 import { fetchHandler} from '../../data'
 import { Content, Sort, Top, Wrapper } from './Contributors.styles'
@@ -28,7 +27,7 @@ const Contributors = () => {
 
    useEffect(() => {
       handleFetch()
-    }, [])
+    }, [sort])
 
 // get all contributors to angular repo
     const fetchData = async(data) => {
@@ -41,27 +40,44 @@ const Contributors = () => {
       ...new Map(level.map((item) => [item['login'], item])).values()
       ]
       setContributors(unique)
-    }
-    const handleSort =(e)=> {
-        
-        if(sort === 'no of contributions'){
+       if(sort === 'no of contributions'){
         return  setContributors((prev) => (
           prev.sort((a, b) => b.contributions-a.contributions)
         ))
       }
+       if(sort === 'no of gists'){
+        const con = await Promise.all(contributors.map(async(c) => await fetchHandler(c.url)))
+        return  setContributors((prev) => (
+          con.sort((a, b) => b.public_gists-a.public_gists)
+        ))
+      }
+      if(sort === 'no of public repos'){
+        const con = await Promise.all(contributors.map(async(c) => await fetchHandler(c.url)))
+        return  setContributors((prev) => (
+          con.sort((a, b) => b.public_repos-a.public_repos)
+        ))
+      }
+       if(sort === 'no of public repos'){
+        const con = await Promise.all(contributors.map(async(c) => await fetchHandler(c.url)))
+        return  setContributors((prev) => (
+          con.sort((a, b) => b.followers-a.followers)
+        ))
+      }
     }
-
-    console.log(sort)
+  
   return (
     <>
     <Wrapper>
       <NavBar/>
       <Top>
+        <h2>Contributors</h2>
         <Sort>
           <h4>
             Sort:
           </h4>
-          <select name="" id="" onChange={(e)=>setSort(e.target.value)} onClick={(e)=> handleSort(e)}>
+          <select name="" id="" 
+          onChange={(e)=>setSort(e.target.value)} 
+          >
             <option>sort</option>
             <option >no of contributions</option>
             <option >no of followers</option>

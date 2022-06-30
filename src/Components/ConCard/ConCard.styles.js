@@ -8,6 +8,10 @@ export const Wrapper = styled.div`
   border-radius: 5px;
   margin: 10px;
   cursor: pointer;
+  transition:all 0.3s ease-in-out;
+  :hover{
+    transform: scale(1.1);
+  }
   a{
     color: inherit;
     text-decoration: none;
