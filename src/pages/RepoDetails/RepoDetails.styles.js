@@ -59,10 +59,10 @@ export const Details = styled.div`
     align-items: center;
     width: 100%;
     cursor: pointer;
-    transition:all 0.3s ease-in-out ;
+    transition:all 0.5s ease-in-out ;
     :hover{
       background-color: lightgray;
-      border-radius: 3px;
+      border-radius: 5px;
     }
   }
    @media(max-width: 680px){
