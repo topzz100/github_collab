@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ConImage, Container, Content, ConWrapper, Details, Image, ImageBox, ShowContrib, Wrapper } from './RepoDetails.styles'
+import { Box, ConImage, Container, Content, ConWrapper, Details, Image, ImageBox, ShowContrib, Wrapper } from './RepoDetails.styles'
 import axios from 'axios'
+import { fetchHandler } from '../../data'
+import NavBar from '../../Components/NavBar/NavBar'
 
 const access_token = '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'
 
@@ -14,12 +16,9 @@ const RepoDetails = () => {
  useEffect(()=> {
     const handleFetch = async(url)=> {
       try{
-         const res = await axios.get(`https://api.github.com/repos/angular/${name}` ,{
-        headers: {
-          'Authorization': `token ${access_token}`
-        }
-      })
-      res.data && setDetails(res.data)
+        const res = await fetchHandler(`https://api.github.com/repos/angular/${name}`)
+        res && setDetails(res)
+       
       }catch(err){
 
       }
@@ -30,12 +29,8 @@ const RepoDetails = () => {
 
  const getContrib =async() => {
    try{
-         const res = await axios.get(details.contributors_url ,{
-        headers: {
-          'Authorization': `token ${access_token}`
-        }
-      })
-      res.data && setContrib(res.data)
+         const res = await fetchHandler(details.contributors_url )
+      res && setContrib(res)
       }catch(err){
 
       }
@@ -46,7 +41,11 @@ const RepoDetails = () => {
 console.log(contrib)
 
   return (
+    <>
     <Wrapper >
+      <NavBar/>
+      <Box>
+
       <Content>
         <ImageBox>
           <Image src={details?.owner.avatar_url} alt=''/> 
@@ -88,7 +87,9 @@ console.log(contrib)
             </Container>
           </ShowContrib>
         }
+      </Box>
     </Wrapper>
+    </>
   )
 }
 

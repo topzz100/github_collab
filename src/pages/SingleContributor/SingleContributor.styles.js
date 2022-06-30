@@ -2,18 +2,27 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
  
   align-items: center;
   justify-content: center;
+
 `
 export const Content = styled.div`
   width:90% ;
   display: flex;
-  height: 80%;
+  height: 85%;
   border: 1px solid black;
   padding: 10px;
+  @media(max-width: 680px){
+    flex-direction: column;
+    min-height: fit-content;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    margin: 50px 0;
+  }
   
 `
 export const ImageBox = styled.div`
@@ -31,13 +40,84 @@ export const Details = styled.div`
   flex: 7;
   width: 100%;
   margin-left: 15px;
+   .repos{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    :hover{
+      background-color: lightgray;
+    }
+  }
   h4{
     font-size: 1.3rem;
     padding: 7px;
     border: 1px solid whitesmoke;
     margin-bottom: 10px;
+    font-weight: 500;
     span{
       margin-right: 20px;
     }
   }
+  @media(max-width: 680px){
+    margin-left: 0;
+    margin-top: 10px;
+  }
+`
+export const ShowRepo = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+`
+export const Container = styled.div`
+    width: 90%;
+  height: 90%;
+  background-color: red;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow-y: scroll;
+  padding-top: 30px;
+  position: relative;
+
+  .fa-xmark{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+`
+export const RepoWrapper = styled.div`
+   width: 150px;
+  height: 200px;
+  background-color: grey;
+  border: black;
+  border-radius: 5px;
+  margin: 10px;
+  a{
+    text-decoration: none;
+  }
+  /* div{
+    object-fit: cover;
+    background-color: blue;
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+  }  */
+  h4{
+    text-align: center;
+    margin-top: 10px;
+  }
+`
+export const RepoImage = styled.img`
+  object-fit: cover;
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
 `

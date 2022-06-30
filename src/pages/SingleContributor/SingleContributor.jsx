@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { Content, Details, Image, ImageBox, Wrapper } from './SingleContributor.styles'
+import { Link, useParams } from 'react-router-dom'
+import { Container, Content, Details, Image, ImageBox, RepoImage, RepoWrapper, ShowRepo, Wrapper } from './SingleContributor.styles'
 import axios from 'axios'
+import { fetchHandler } from '../../data'
+import NavBar from '../../Components/NavBar/NavBar'
 
 
-const access_token = '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'
-
+const access_token = process.env.REACT_APP_ACCESS_TOKEN
 const SingleContributor = () => {
   const[user, setUser] = useState(null)
    const[repos, setRepos] = useState([])
@@ -14,40 +15,33 @@ const SingleContributor = () => {
 
 
   useEffect(()=>{
-    const fetchUser = async()=>{
+    const getUser = async() => {
       try{
-        
-      const res = await axios.get(`https://api.github.com/users/${name}` ,{
-        headers: {
-          'Authorization': `token ${access_token}`
-        }
-      })
-      res.data && setUser(res.data)
+         const res = await fetchHandler(`https://api.github.com/users/${name}`)
+      res && setUser(res)
       }catch(err){
-        console.log(err)
+
       }
     }
-    fetchUser()
+    getUser()
   },[])
 
-  useEffect(()=>{
-    const getRepos = async() => {
-      try{
-         const res = await axios.get(`https://api.github.com/users/${name}` ,{
-        headers: {
-          'Authorization': `token ${access_token}`
-        }
-      })
-      res.data && setUser(res.data)
-      }catch(err){
-
-      }
+   const getRepos =async() => {
+    try{
+        const res = await fetchHandler(user?.repos_url)
+      res && setRepos(res)
+    }catch(err){
+      console.log(err)
     }
+ } 
+
+  useEffect(()=> {
     getRepos()
-  },[])
-  console.log(user)
+  },[show])
 
   return (
+    <>
+      <NavBar/>
     <Wrapper>
       <Content>
         <ImageBox>
@@ -72,16 +66,39 @@ const SingleContributor = () => {
             <span>{user?.followers}</span>
           </h4>
           <h4>
-            <span>Username:</span>
-            <span>Lorem Ipsum</span>
+            <span>Public repos</span>
+            <span>{user?.public_repos}</span>
           </h4>
           <h4>
-            <span>Contributions:</span>
-            <span>Lorem Ipsum</span>
+            <span>Public gists:</span>
+            <span>{user?.public_gists}</span>
+          </h4>
+           <h4 className='repos' onClick={()=> setShow(true)}>
+            <span>Repos</span>
+            <span><i className="fa-solid fa-arrow-right"></i></span>
           </h4>
         </Details>
       </Content>
+      {show && 
+          <ShowRepo>
+            <Container>
+              {
+                repos?.map((rep)=>(
+                  <RepoWrapper key={rep.id} >
+                  <i className="fa-solid fa-xmark" onClick={() => setShow(false)}></i>
+                  <Link to={`/repos/${rep?.name}`}>
+                    <RepoImage src={rep?.owner.avatar_url}/>
+                    <h4>{rep?.name}</h4>
+                  </Link>
+                </RepoWrapper>
+
+                ))
+              }
+            </Container>
+          </ShowRepo>
+        }
     </Wrapper>
+    </>
   )
 }
 

@@ -1,7 +1,7 @@
 import axios from 'axios'
-const access_token = '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'
+const access_token = process.env.REACT_APP_ACCESS_TOKEN
 
- const handleFetch = async(url)=> {
+ export const fetchHandler = async(url)=> {
     try{
 
        const res = await axios.get(url, {
@@ -15,25 +15,3 @@ const access_token = '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'
      }
    }
 
-export const data = async() => {
-  let contrib = []
-    try{
-
-      const res = await axios.get('https://api.github.com/users/angular/repos' ,{
-        headers: {
-          'Authorization': `token ${access_token}`
-        }
-      })
-      res.data.forEach(async(repo) => (
-        (await handleFetch(repo.contributors_url)).forEach(r => contrib.push(r))
-        )
-        )
-        
-       // setCollabs((prev) => [...prev, contrib])
-        
-      }catch(err){
-
-      }
-      return contrib
-  }
-export const arr1 = data().then(res => res)

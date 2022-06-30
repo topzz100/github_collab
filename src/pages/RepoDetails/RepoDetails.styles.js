@@ -2,7 +2,10 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+`
+export const Box = styled.div`
+  width: 100%;
+  min-height: 100vh;
   display: flex;
  
   align-items: center;
@@ -12,9 +15,17 @@ export const Wrapper = styled.div`
 export const Content = styled.div`
   width:90% ;
   display: flex;
-  height: 80%;
+  height: 85%;
   border: 1px solid black;
   padding: 10px;
+    @media(max-width: 680px){
+    flex-direction: column;
+    min-height: fit-content;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    margin: 50px 0;
+  }
   
 `
 export const ImageBox = styled.div`
@@ -37,6 +48,7 @@ export const Details = styled.div`
     padding: 7px;
     border: 1px solid whitesmoke;
     margin-bottom: 10px;
+    font-weight: 500;
     span{
       margin-right: 20px;
     }
@@ -46,9 +58,14 @@ export const Details = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    cursor: pointer;
     :hover{
       background-color: lightgray;
     }
+  }
+   @media(max-width: 680px){
+    margin-left: 0;
+    margin-top: 10px;
   }
 `
 export const ShowContrib = styled.div`

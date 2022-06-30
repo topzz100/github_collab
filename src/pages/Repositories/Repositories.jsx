@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import RepoCard from '../RepoCard/RepoCard'
+import RepoCard from '../../Components/RepoCard/RepoCard'
 import { Content, Top, Wrapper } from './Repositories.style'
 import axios from 'axios'
+import { fetchHandler } from '../../data'
+import NavBar from '../../Components/NavBar/NavBar'
 const Repositories = () => {
   const [repos, setRepos] = useState([])
   const access_token = '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'
@@ -10,12 +12,8 @@ const Repositories = () => {
     const handleFetch = async()=> {
     try{
 
-       const res = await axios.get('https://api.github.com/users/angular/repos', {
-         headers: {
-           'Authorization': `token ${access_token}`
-        }
-       })
-        res.data && setRepos(res.data)
+       const res = await fetchHandler('https://api.github.com/users/angular/repos')
+        res && setRepos(res)
      }catch(err){
        console.log(err)
      }
@@ -24,6 +22,7 @@ const Repositories = () => {
   }, [])
   return (
     <Wrapper>
+      <NavBar/>
       <Top>
        
       </Top>
